@@ -1,0 +1,57 @@
+#include <iostream>
+
+#include <stdbool.h>
+
+#define MAXSIZE 64
+
+using namespace std;
+
+typedef struct Node{
+    int data;
+    struct Node * next;
+}linklist;
+
+typedef struct{
+    linklist * head, * tail;
+}linkqueue;
+
+void lqclean( linkqueue * s )
+{
+    s->head = new linklist;
+    s->head->next = NULL;
+    s->tail = s->head;
+}
+
+void pushqueue( linkqueue * s,int x )
+{
+    s->tail->next = new linklist;
+    s->tail->next = NULL;
+    s->tail = s->tail->next;
+    s->tail->data = x;
+}
+
+void popqueue ( linkqueue * s )
+{
+    linklist * q;
+    q = s->head->next;
+    s->head = q;
+    delete q;
+}
+
+void showqueue ( linkqueue * s )
+{
+
+}
+
+int main()
+{
+    linkqueue * s = new linkqueue;
+    int x = 10;
+    lqclean( s );
+    pushqueue( s,x );
+    showqueue( s );
+    popqueue( s );
+    showqueue( s );
+    delete s;
+    return 0;
+}
